@@ -11,7 +11,7 @@ class FoodList extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    let pg = nextProps.countries
+    let pg = nextProps.foods
     const pages = Math.ceil(pg.length / 50)
     let pageArr = []
 
@@ -23,6 +23,7 @@ class FoodList extends Component {
       foodPages: pageArr,
       pages
     })
+
   }
 
   setPage = (page) => {

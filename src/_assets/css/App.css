@@ -77,6 +77,15 @@ button {
   color: var(--darkgray);
 }
 
+.foodlog--list-item .food-name {
+  font-size: 20px;
+}
+
+.foodlog--list-item .food-brand {
+  font-size: 11px;
+  color: var(--lightgray);
+}
+
 .action button {
   background: none;
   color: var(--lightgreen);

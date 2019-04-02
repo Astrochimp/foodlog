@@ -5,7 +5,7 @@ export default( state={}, action) => {
     case actions.SEARCH_RESULTS:
       return {
         ...state,
-        food: action.payload,
+        foods: action.payload,
         message: ''
       }
     case actions.FOOD_DETAIL:

@@ -16,7 +16,8 @@ class FoodCard extends Component {
       <div className='foodlog--list-item'
         data-testid='foodlog--list-item'
         onClick={(e) => this.handleClick(e, food)}>
-        {food.name}
+          <div className='food-name'>{food.name}</div>
+          <div className='food-brand'>{food.brand}</div>
       </div>
     )
   }

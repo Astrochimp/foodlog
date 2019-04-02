@@ -7,7 +7,7 @@ class FoodSearch extends Component {
     searchText: ''
   }
 
-  searchCountries = (event) => {
+  searchFood = (event) => {
     this.setState({
       searchText: event.target.value
     })
@@ -15,7 +15,7 @@ class FoodSearch extends Component {
 
   submitForm = (event) => {
     event.preventDefault()
-    this.props.searchCountry(this.state.searchText)
+    this.props.searchFood(this.state.searchText)
   }
 
   render() {
@@ -37,7 +37,6 @@ class FoodSearch extends Component {
 export default connect(
   (state) => ({ searchText: state.searchText }),
   {
-    searchFood,
-    listAll
+    searchFood
   }
 )(FoodSearch)
