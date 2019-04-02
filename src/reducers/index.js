@@ -20,6 +20,33 @@ export default( state={}, action) => {
         food: [],
         message: 'No Results'
       }
+    case actions.ADD_EVENT:
+      return {
+          ...state,
+          newevent: action.payload,
+          show: true
+      }
+    case actions.SAVE_FOOD:
+      let sevTime = new Date(state.newevent)
+      const sevHR = action.payload.eventtime.split(':')
+      sevTime.setHours(sevHR[0], sevHR[1])
+      const updatedeventid = state.trackeventid + 1
+
+      const neweventDetails = {
+        eventid: updatedeventid,
+        date: state.newevent,
+        eventtime: sevTime,
+        title: action.payload.title,
+        color: action.payload.color
+      }
+
+      return {
+        ...state,
+        eventList: state.eventList.concat(neweventDetails),
+        show: false,
+        eventid: null,
+        trackeventid: updatedeventid
+      }
     default:
       return state
   }
