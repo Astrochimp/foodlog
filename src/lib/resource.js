@@ -1,3 +1,2 @@
-const baseUrl = 'https://restcountries.eu/rest/v2'
-export const countrySearchUrl = `${baseUrl}/name/`
-export const countryAllUrl = `${baseUrl}/all/`
+const baseUrl = 'https://68xqa2jxzh.execute-api.us-east-1.amazonaws.com/dev/search'
+export const foodSearchUrl = `${baseUrl}?kv=`

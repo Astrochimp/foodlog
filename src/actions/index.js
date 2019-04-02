@@ -1,17 +1,16 @@
-import { countrySearchUrl, countryAllUrl  } from '../lib/resource'
+import { foodSearchUrl } from '../lib/resource'
 import axios from 'axios'
 
 export const LIST_ALL = 'LIST_ALL'
-export const SEARCH_COUNTRY = 'SEARCH_COUNTRY'
+export const SEARCH_FOOD = 'SEARCH_FOOD'
 export const SEARCH_RESULTS = 'SEARCH_RESULTS'
 export const NO_RESULTS = 'NO_RESULTS'
-export const COUNTRY_DETAIL = 'COUNTRY_DETAIL'
+export const FOOD_DETAIL = 'FOOD_DETAIL'
 
-
-export const listAll = () => {
+export const searchFood = (text) => {
   return async (dispatch) => {
     try {
-      const result = await axios.get(countryAllUrl)
+      const result = await axios.get(foodSearchUrl + text)
 
       dispatch({
         type: SEARCH_RESULTS,
@@ -26,28 +25,10 @@ export const listAll = () => {
   }
 }
 
-export const searchCountry = (text) => {
-  return async (dispatch) => {
-    try {
-      const result = await axios.get(countrySearchUrl + text)
-
-      dispatch({
-        type: SEARCH_RESULTS,
-        payload: result.data
-      })
-
-    } catch (error) {
-      dispatch({
-        type: NO_RESULTS
-      })
-    }
-  }
-}
-
-export const countryDetail = (country) => {
+export const foodDetail = (food) => {
   return({
-    type: COUNTRY_DETAIL,
-    payload: country
+    type: FOOD_DETAIL,
+    payload: food
   })
 }
 

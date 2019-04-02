@@ -1,33 +1,162 @@
-.App {
-  text-align: center;
+:root {
+  --black: #0B0C10;
+  --darkgray: #1F2833;
+  --lightgray: #C5C6C7;
+  --lightgreen: #66FCF1;
+  --darkgreen: #45A29E;
+  --white: #fff;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+
+.App-Title {
+  color: var(--lightgreen);
+  margin: 1px 0;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  text-align: center;
+}
+
+.search--form {
+  margin: 0 0 20px 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.search--form input[type='text'] {
+  background: none;
+  border: none;
+  border-bottom: 3px solid var(--lightgreen);
+  color: var(--lightgreen);
+  padding: 5px;
+  flex: 1;
+  font-size: 28px;
+}
+
+button {
+  display: inline;
+  color: var(--lightgreen);
+  background: none;
+  border: none;
+  font-size: 20px;
+}
+
+.search--list {
+  background: var(--darkgray);
+  margin: 20px 0;
+  border-bottom: 1px solid var(--lightgreen);
+  padding: 10px 0 10px 0;
+}
+
+.search--results {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 90vh;
+  overflow: auto;
+}
+
+.foodlog--list-item {
+  padding: 5px;
+  border-bottom: 1px solid #333;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.foodlog--list-item:hover {
+  background: var(--lightgreen);
+  color: var(--darkgray);
+}
+
+.action button {
+  background: none;
+  color: var(--lightgreen);
+  font-size: 25px;
+}
+
+.action button:hover {
+  color: var(--darkgreen);
+}
+
+.foodlog--layout {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.foodlog--details {
+  font-size: 30px;
+  padding: 30px;
+}
+
+.foodlog--title {
+  display: flex;
+  flex-direction: row;
+  margin: 0 5px 5px 5px;
+}
+
+.foodlog--title a {
+  display: block;
+  flex: 1;
+  color: var(--lightgreen);
+  text-decoration: none;
+}
+
+.foodlog--title a:hover {
+  color: var(--darkgreen);
+}
+
+.foodlog--title h3 {
+  margin: 0;
+}
+
+.loading {
+  width: 120px;
+  height: 120px;
+  border: none;
+  border-top: 5px solid var(--lightgreen);
+  border-bottom: 5px solid var(--lightgreen);
+  border-radius: 50%;
+  margin: 50px auto 50px auto;
+  animation: spinner 1s linear infinite;
+}
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  margin: 5px auto 20px auto;
+  padding: 3px;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.pagination div {
+  margin: 0px 5px;
+  padding: 3px;
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.pagination div:hover {
+  color: var(--lightgreen);
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg) scale(1);
   }
-  to {
-    transform: rotate(360deg);
+
+  50% {
+    transform: rotate(45deg) scale(0.8);
+  }
+
+  100% {
+    transform: rotate(360deg) scale(1);
   }
 }
