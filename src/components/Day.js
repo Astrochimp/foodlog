@@ -19,7 +19,21 @@ class Day extends Component {
     const { currentDay } = this.props
     const dateFormat = 'MMMM D, YYYY'
     const formattedDate = dateFns.format(currentDay, dateFormat)
-    const foodList = this.props.mealList
+    let foodList = []
+
+    if (this.props.mealList.length <= 0) {
+      foodList = JSON.parse(localStorage.getItem('foods')) || []
+    } else {
+      foodList = this.props.mealList
+    }
+
+    const filterFoods = foodList.filter(item => dateFns.isSameDay(item.day, currentDay))
+
+    let mealDay = []
+
+    if (filterFoods.length === 1) {
+      mealDay = filterFoods[0].foods
+    }
 
     return (
       <div className='dayview--wrapper'>
@@ -31,12 +45,11 @@ class Day extends Component {
           <div className='mealtime' onClick={() => this.clickMeal('Dinner')}>Dinner</div>
           <div className='mealtime' onClick={() => this.clickMeal('Snack')}>Snack</div>
         </div>
-        {foodList.map((food, ind) => {
+        {mealDay.map((food, ind) => {
           return(
             <div key={ind}>
-              {food.meal}<br />
-              {food.food.name}<br />
-              {food.food.calories}<br />
+              <strong>{food.meal}</strong>
+              <div>{food.food.name} {food.food.calories}</div>
             </div>
           )
         })}

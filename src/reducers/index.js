@@ -1,4 +1,5 @@
 import * as actions from '../actions/index'
+import dateFns from 'date-fns'
 
 const initialState = {
   currentDay: new Date(),
@@ -40,19 +41,44 @@ export default( state = initialState, action) => {
           show: true
       }
     case actions.SAVE_FOOD:
-      const mealFood = {
-        day: state.currentDay,
+
+      const foodDetail = {
         meal: state.currentMeal,
         food: action.payload
       }
 
+      const mealFood = {
+        day: state.currentDay,
+        foods: [foodDetail]
+      }
+
       let localFoods = JSON.parse(localStorage.getItem('foods')) || []
-      localFoods.push(mealFood)
-      localStorage.setItem('foods', JSON.stringify(localFoods))
+
+      const filterFoods = localFoods.filter(item => dateFns.isSameDay(item.day, mealFood.day))
+      console.log('filterFoods', filterFoods)
+
+      // Add food to a specific day
+      let addFoods = []
+      if (filterFoods.length > 0) {
+        addFoods = localFoods.map((item) => {
+          if (dateFns.isSameDay(item.day, mealFood.day)) {
+            item.foods.push(foodDetail)
+          }
+
+          return item
+        })
+      } else {
+        localFoods.push(mealFood)
+        addFoods = localFoods
+      }
+      console.log('addFoods', addFoods)
+
+      // localFoods.push(mealFood)
+      localStorage.setItem('foods', JSON.stringify(addFoods))
 
       return {
         ...state,
-        mealList: state.mealList.concat(mealFood),
+        mealList: addFoods,
         food: {},
         show: false
       }
