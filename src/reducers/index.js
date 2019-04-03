@@ -1,6 +1,11 @@
 import * as actions from '../actions/index'
 
-export default( state={}, action) => {
+const initialState = {
+  currentDay: new Date(),
+  show: false
+}
+
+export default( state = initialState, action) => {
   switch (action.type) {
     case actions.SEARCH_RESULTS:
       return {
@@ -19,6 +24,11 @@ export default( state={}, action) => {
         ...state,
         food: [],
         message: 'No Results'
+      }
+    case actions.ADD_MEAL:
+      return {
+          ...state,
+          show: true
       }
     case actions.ADD_EVENT:
       return {

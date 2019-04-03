@@ -9,7 +9,7 @@ export const FOOD_DETAIL = 'FOOD_DETAIL'
 export const ADD_EVENT = 'ADD_EVENT'
 export const SAVE_FOOD = 'SAVE_FOOD'
 export const CLOSE_MODAL = 'CLOSE_MODAL'
-
+export const ADD_MEAL = 'ADD_MEAL'
 
 export const saveFood = (food) => {
   return({
@@ -28,6 +28,17 @@ export const addEvent = (newevent) => {
   return ({
     type: ADD_EVENT,
     payload: newevent
+  })
+}
+
+export const addMeal = (meal, currentDay, food) => {
+  return({
+    type: ADD_MEAL,
+    payload: {
+      currentDay,
+      meal,
+      show: true
+    }
   })
 }
 

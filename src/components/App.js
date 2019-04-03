@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import FoodSearch from './FoodSearch'
-import FoodList from './FoodList'
-import FoodDetail from './FoodDetail'
+import Day from './Day'
+import Modal from './Modal'
 import '../_assets/css/App.css'
 
 class App extends Component {
@@ -11,13 +10,8 @@ class App extends Component {
         <header>
           <h1>Food Log</h1>
         </header>
-        <div className='foodlog--layout'>
-          <div>
-            <FoodSearch />
-            <FoodList />
-          </div>
-          <FoodDetail />
-        </div>
+        <Day />
+        <Modal />
       </div>
     );
   }
