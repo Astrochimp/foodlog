@@ -8,7 +8,9 @@ class Modal extends Component {
 
     return (
       <div className={showHide}>
-        <Food />
+        <div className='modal-form'>
+          <Food />
+        </div>
       </div>
     )
   }
