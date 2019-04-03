@@ -61,7 +61,7 @@ button {
 .search--results {
   display: flex;
   flex-direction: column;
-  height: 90vh;
+  height: 40vh;
   overflow: auto;
 }
 
@@ -97,13 +97,18 @@ button {
 }
 
 .foodlog--layout {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
+  display: flex;
+  flex-direction: column;
 }
 
 .foodlog--details {
-  font-size: 30px;
-  padding: 30px;
+  font-size: 20px;
+  padding: 10px;
+}
+
+.foodlog-name {
+  padding: 0px;
+  margin: 0px;
 }
 
 .foodlog--title {
@@ -186,7 +191,7 @@ button {
 
 .modal-form {
   position: fixed;
-  background: #000;
+  background: rgb(68, 68, 68);
   height: auto;
   width: 500px;
   top: 50%;
@@ -195,4 +200,22 @@ button {
   padding: 30px;
   border-radius: 5px;
   font-size: 22px;
+}
+
+.meals {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.mealtime {
+  display: block;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  padding: 5px 20px;
+  margin: 1px;
+}
+
+.mealtime:hover {
+  background-color: var(--dark-green);
 }

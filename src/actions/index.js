@@ -35,8 +35,8 @@ export const addMeal = (meal, currentDay, food) => {
   return({
     type: ADD_MEAL,
     payload: {
+      currentMeal: meal,
       currentDay,
-      meal,
       show: true
     }
   })

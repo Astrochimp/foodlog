@@ -13,7 +13,7 @@ class Day extends Component {
 
   clickMeal = (meal) => {
     console.log('meal', meal)
-    this.props.addMeal('meal')
+    this.props.addMeal(meal)
   }
 
   render () {
@@ -21,18 +21,15 @@ class Day extends Component {
     const dateFormat = 'MMMM D, YYYY'
     const formattedDate = dateFns.format(currentDay, dateFormat)
 
-
     return (
       <div className='dayview--wrapper'>
         <h3>{formattedDate}</h3>
 
         <div className='meals'>
-          <ul>
-            <li onClick={() => this.clickMeal('breakfast')}>Breakfast</li>
-            <li onClick={() => this.clickMeal('lunch')}>Lunch</li>
-            <li onClick={() => this.clickMeal('dinner')}>Dinner</li>
-            <li onClick={() => this.clickMeal('snacks')}>Snacks</li>
-          </ul>
+          <div className='mealtime' onClick={() => this.clickMeal('Breakfast')}>Breakfast</div>
+          <div className='mealtime' onClick={() => this.clickMeal('Lunch')}>Lunch</div>
+          <div className='mealtime' onClick={() => this.clickMeal('Dinner')}>Dinner</div>
+          <div className='mealtime' onClick={() => this.clickMeal('Snack')}>Snack</div>
         </div>
       </div>
     )

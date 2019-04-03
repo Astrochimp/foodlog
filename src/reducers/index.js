@@ -2,7 +2,9 @@ import * as actions from '../actions/index'
 
 const initialState = {
   currentDay: new Date(),
-  show: false
+  show: false,
+  currentMeal: '',
+  mealList: []
 }
 
 export default( state = initialState, action) => {
@@ -28,6 +30,7 @@ export default( state = initialState, action) => {
     case actions.ADD_MEAL:
       return {
           ...state,
+          currentMeal: action.payload.currentMeal,
           show: true
       }
     case actions.ADD_EVENT:
