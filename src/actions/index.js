@@ -14,7 +14,7 @@ export const ADD_MEAL = 'ADD_MEAL'
 export const saveFood = (food) => {
   return({
     type: SAVE_FOOD,
-    paylooad: food
+    payload: food
   })
 }
 

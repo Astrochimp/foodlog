@@ -40,25 +40,21 @@ export default( state = initialState, action) => {
           show: true
       }
     case actions.SAVE_FOOD:
-      let sevTime = new Date(state.newevent)
-      const sevHR = action.payload.eventtime.split(':')
-      sevTime.setHours(sevHR[0], sevHR[1])
-      const updatedeventid = state.trackeventid + 1
-
-      const neweventDetails = {
-        eventid: updatedeventid,
-        date: state.newevent,
-        eventtime: sevTime,
-        title: action.payload.title,
-        color: action.payload.color
+      const mealFood = {
+        day: state.currentDay,
+        meal: state.currentMeal,
+        food: action.payload
       }
+
+      let localFoods = JSON.parse(localStorage.getItem('foods')) || []
+      localFoods.push(mealFood)
+      localStorage.setItem('foods', JSON.stringify(localFoods))
 
       return {
         ...state,
-        eventList: state.eventList.concat(neweventDetails),
-        show: false,
-        eventid: null,
-        trackeventid: updatedeventid
+        mealList: state.mealList.concat(mealFood),
+        food: {},
+        show: false
       }
     default:
       return state

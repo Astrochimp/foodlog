@@ -12,7 +12,6 @@ class Day extends Component {
   }
 
   clickMeal = (meal) => {
-    console.log('meal', meal)
     this.props.addMeal(meal)
   }
 
@@ -20,6 +19,7 @@ class Day extends Component {
     const { currentDay } = this.props
     const dateFormat = 'MMMM D, YYYY'
     const formattedDate = dateFns.format(currentDay, dateFormat)
+    const foodList = this.props.mealList
 
     return (
       <div className='dayview--wrapper'>
@@ -31,6 +31,15 @@ class Day extends Component {
           <div className='mealtime' onClick={() => this.clickMeal('Dinner')}>Dinner</div>
           <div className='mealtime' onClick={() => this.clickMeal('Snack')}>Snack</div>
         </div>
+        {foodList.map((food, ind) => {
+          return(
+            <div key={ind}>
+              {food.meal}<br />
+              {food.food.name}<br />
+              {food.food.calories}<br />
+            </div>
+          )
+        })}
       </div>
     )
   }
@@ -38,7 +47,8 @@ class Day extends Component {
 
 export default connect(
   (state) => ({
-    currentDay: state.currentDay
+    currentDay: state.currentDay,
+    mealList: state.mealList
   }),{
     addMeal
   }
