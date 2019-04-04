@@ -12,7 +12,12 @@ class Day extends Component {
     food: {},
     formattedDate: '',
     filterFoods: [],
-    completeDay: false
+    completeDay: false,
+    totalCals: 0,
+    breakfast: [],
+    lunch: [],
+    dinner: [],
+    snack: []
   }
 
   setToday = () => {
@@ -27,9 +32,22 @@ class Day extends Component {
     this.props.prevDay(this.props.currentDay)
   }
 
+  checkMeal = (meal) => {
+    switch (meal) {
+      case 'Breakfast':
+        return true
+      default:
+        return true
+    }
+  }
+
   clickMeal = (meal) => {
     if (!this.state.completeDay) {
-      this.props.addMeal(meal)
+      if (this.checkMeal(meal)) {
+        this.props.addMeal(meal)
+      } else {
+        console.log('sorry cannot go back')
+      }
     } else {
       console.log('sorry! complete')
     }
@@ -55,13 +73,33 @@ class Day extends Component {
     const filterFoods = foodList.filter(item => dateFns.isSameDay(item.day, currentDay))
     let completeDay = filterFoods.length >= 1 ? filterFoods[0].complete : false
 
+    let mealDay = []
+
+    if (filterFoods.length === 1) {
+      mealDay = filterFoods[0].foods
+    }
+
+    let totalCals = mealDay.reduce((calories, food) => {
+      return calories + food.food.calories
+    }, 0)
+
+    let breakfast = mealDay.filter(food => food.meal === 'Breakfast')
+    let lunch = mealDay.filter(food => food.meal === 'Lunch')
+    let dinner = mealDay.filter(food => food.meal === 'Dinner')
+    let snack = mealDay.filter(food => food.meal === 'Snack')
 
     this.setState({
       currentDay,
       formattedDate,
       filterFoods,
-      completeDay
+      completeDay,
+      totalCals,
+      breakfast,
+      lunch,
+      dinner,
+      snack
     })
+
   }
 
   componentDidMount() {
@@ -81,19 +119,10 @@ class Day extends Component {
     let completeDay = filterFoods.length >= 1 ? filterFoods[0].complete : false
 
 
-    this.setState({
-      currentDay,
-      formattedDate,
-      filterFoods,
-      completeDay
-    })
-  }
-
-  render () {
     let mealDay = []
 
-    if (this.state.filterFoods.length === 1) {
-      mealDay = this.state.filterFoods[0].foods
+    if (filterFoods.length === 1) {
+      mealDay = filterFoods[0].foods
     }
 
     let totalCals = mealDay.reduce((calories, food) => {
@@ -104,6 +133,21 @@ class Day extends Component {
     let lunch = mealDay.filter(food => food.meal === 'Lunch')
     let dinner = mealDay.filter(food => food.meal === 'Dinner')
     let snack = mealDay.filter(food => food.meal === 'Snack')
+
+    this.setState({
+      currentDay,
+      formattedDate,
+      filterFoods,
+      completeDay,
+      totalCals,
+      breakfast,
+      lunch,
+      dinner,
+      snack
+    })
+  }
+
+  render () {
 
     return (
       <div className='dayview--wrapper'>
@@ -130,7 +174,7 @@ class Day extends Component {
         }
 
         <div className='calories-toolbar'>
-          Total Calories: {totalCals}
+          Total Calories: {this.state.totalCals}
           {!this.state.completeDay && 
             <button onClick={this.doneEating}>I'm Done Eating</button>
           }
@@ -139,19 +183,19 @@ class Day extends Component {
           <MealSection
             clickMeal={this.clickMeal}
             mealName='Breakfast'
-            mealList={breakfast} />
+            mealList={this.state.breakfast} />
           <MealSection
             clickMeal={this.clickMeal}
             mealName='Lunch'
-            mealList={lunch} />
+            mealList={this.state.lunch} />
           <MealSection
             clickMeal={this.clickMeal}
             mealName='Snack'
-            mealList={snack} />
+            mealList={this.state.snack} />
           <MealSection
             clickMeal={this.clickMeal}
             mealName='Dinner'
-            mealList={dinner} />
+            mealList={this.state.dinner} />
         </div>
       </div>
     )
