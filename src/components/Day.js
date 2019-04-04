@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import dateFns from 'date-fns'
 import { connect } from 'react-redux'
-import { addMeal } from '../actions/index';
+import { addMeal, nextDay, prevDay } from '../actions/index';
 import MealSection from './MealSection'
 
 class Day extends Component {
@@ -12,8 +12,20 @@ class Day extends Component {
     food: {}
   }
 
+  nextDay = () => {
+    this.props.nextDay(this.props.currentDay)
+  }
+
+  prevDay = () => {
+    this.props.prevDay(this.props.currentDay)
+  }
+
   clickMeal = (meal) => {
     this.props.addMeal(meal)
+  }
+
+  doneEating = () => {
+    console.log('done')
   }
 
   render () {
@@ -37,7 +49,6 @@ class Day extends Component {
     }
 
     let totalCals = mealDay.reduce((calories, food) => {
-      console.log('food', food)
       return calories + food.food.calories
     }, 0)
 
@@ -49,11 +60,14 @@ class Day extends Component {
     return (
       <div className='dayview--wrapper'>
         <h3>{formattedDate}</h3>
+        <div onClick={this.prevDay}>Prev</div>
+        <div onClick={this.nextDay}>Next</div>
         <div>
           Total Calories: {totalCals}
+
+          <button onClick={this.doneEating}>I'm Done Eating</button>
         </div>
         <div className='meals'>
-
           <MealSection
             clickMeal={this.clickMeal}
             mealName='Breakfast'
@@ -64,13 +78,12 @@ class Day extends Component {
             mealList={lunch} />
           <MealSection
             clickMeal={this.clickMeal}
-            mealName='Dinner'
-            mealList={dinner} />
-          <MealSection
-            clickMeal={this.clickMeal}
             mealName='Snack'
             mealList={snack} />
-
+          <MealSection
+            clickMeal={this.clickMeal}
+            mealName='Dinner'
+            mealList={dinner} />
         </div>
       </div>
     )
@@ -82,6 +95,8 @@ export default connect(
     currentDay: state.currentDay,
     mealList: state.mealList
   }),{
-    addMeal
+    addMeal,
+    nextDay,
+    prevDay
   }
 )(Day)

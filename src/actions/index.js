@@ -1,5 +1,6 @@
 import { foodSearchUrl } from '../lib/resource'
 import axios from 'axios'
+import dateFns from 'date-fns'
 
 export const LIST_ALL = 'LIST_ALL'
 export const SEARCH_FOOD = 'SEARCH_FOOD'
@@ -10,6 +11,25 @@ export const ADD_EVENT = 'ADD_EVENT'
 export const SAVE_FOOD = 'SAVE_FOOD'
 export const CLOSE_MODAL = 'CLOSE_MODAL'
 export const ADD_MEAL = 'ADD_MEAL'
+export const NEXT_DAY = 'NEXT_DAY'
+export const PREV_DAY = 'PREV_DAY'
+
+
+export const nextDay = (currentday) => {
+  const nextday = dateFns.addDays(currentday, 1)
+  return({
+    type: NEXT_DAY,
+    payload: nextday
+  })
+}
+
+export const prevDay = (currentday) => {
+  const prevday = dateFns.subDays(currentday, 1)
+  return({
+    type: NEXT_DAY,
+    payload: prevday
+  })
+}
 
 export const saveFood = (food) => {
   return({

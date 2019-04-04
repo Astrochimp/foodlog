@@ -10,6 +10,18 @@ const initialState = {
 
 export default( state = initialState, action) => {
   switch (action.type) {
+    case actions.PREV_DAY:
+      return {
+        ...state,
+        currentDay: action.payload
+      }
+
+    case actions.NEXT_DAY:
+      return {
+        ...state,
+        currentDay: action.payload
+      }
+
     case actions.SEARCH_RESULTS:
       return {
         ...state,
