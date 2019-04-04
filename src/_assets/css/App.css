@@ -50,9 +50,20 @@ body {
 button {
   display: inline;
   color: var(--lightgreen);
+  cursor: pointer;
+  border: 1px solid var(--lightgreen);
   background: none;
-  border: none;
-  font-size: 20px;
+  font-size: 18px;
+  padding: 3px 7px;
+  margin: 0px 5px;
+  border-radius: 2px;
+  transition: all 300ms ease-in-out;
+}
+
+button:hover {
+  color: var(--white);
+  background: var(--lightgreen);
+  transition: all 300ms ease-in-out;
 }
 
 .search--list {
@@ -206,6 +217,21 @@ button {
   font-size: 22px;
 }
 
+.close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 30px;
+  cursor: pointer;
+  color: var(--lightgray);
+  transition: all 300ms ease;
+}
+
+.close:hover {
+  color: var(--lightgreen);
+  transition: all 300ms ease;
+}
+
 .meals {
   display: flex;
   flex-direction: column;
@@ -234,4 +260,36 @@ button {
 
 .food-item:hover {
   background: var(--lightgray);
+}
+
+.date-nav {
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.date-prev, .date-next {
+  font-size: 30px;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+
+.date-prev:hover, .date-next:hover {
+  color: var(--lightgreen);
+  transition: all 300ms ease-in-out;
+}
+
+.click-today {
+  font-size: 12px;
+  text-align: center;
+  margin: 5px auto;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+
+.click-today:hover {
+  color: var(--lightgreen);
+  transition: all 300ms ease-in-out;
 }

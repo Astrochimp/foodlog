@@ -13,7 +13,16 @@ export const CLOSE_MODAL = 'CLOSE_MODAL'
 export const ADD_MEAL = 'ADD_MEAL'
 export const NEXT_DAY = 'NEXT_DAY'
 export const PREV_DAY = 'PREV_DAY'
+export const TODAY = 'TODAY'
 
+export const setToday = () => {
+  const setToday = new Date()
+
+  return({
+    type: TODAY,
+    payload: setToday
+  })
+}
 
 export const nextDay = (currentday) => {
   const nextday = dateFns.addDays(currentday, 1)

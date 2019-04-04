@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import dateFns from 'date-fns'
 import { connect } from 'react-redux'
-import { addMeal, nextDay, prevDay } from '../actions/index';
+import { addMeal, nextDay, prevDay, setToday } from '../actions/index';
 import MealSection from './MealSection'
 
 class Day extends Component {
@@ -10,6 +10,10 @@ class Day extends Component {
     currentDay: this.props.currentDay,
     meal: '',
     food: {}
+  }
+
+  setToday = () => {
+    this.props.setToday()
   }
 
   nextDay = () => {
@@ -59,12 +63,26 @@ class Day extends Component {
 
     return (
       <div className='dayview--wrapper'>
-        <h3>{formattedDate}</h3>
-        <div onClick={this.prevDay}>Prev</div>
-        <div onClick={this.nextDay}>Next</div>
-        <div>
-          Total Calories: {totalCals}
+        <div className='date-nav'>
+          <div className='date-prev'
+            title='Previous Day'
+            onClick={this.prevDay}>
+            &larr;
+          </div>
+          <div className='current-day'>
+            <h3>{formattedDate}</h3>
+          </div>
+          <div className='date-next'
+            title='Previous Day'
+            onClick={this.nextDay}>
+            &rarr;
+          </div>
+        </div>
 
+        <div className='click-today' onClick={this.setToday}>Back to Today</div>
+
+        <div className='calories-toolbar'>
+          Total Calories: {totalCals}
           <button onClick={this.doneEating}>I'm Done Eating</button>
         </div>
         <div className='meals'>
@@ -97,6 +115,7 @@ export default connect(
   }),{
     addMeal,
     nextDay,
-    prevDay
+    prevDay,
+    setToday
   }
 )(Day)

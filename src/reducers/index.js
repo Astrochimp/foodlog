@@ -10,6 +10,17 @@ const initialState = {
 
 export default( state = initialState, action) => {
   switch (action.type) {
+    case actions.CLOSE_MODAL:
+      return {
+        ...state,
+        show: false
+      }
+    case actions.TODAY:
+      return {
+        ...state,
+        currentDay: action.payload
+      }
+
     case actions.PREV_DAY:
       return {
         ...state,
@@ -65,11 +76,8 @@ export default( state = initialState, action) => {
       }
 
       let localFoods = JSON.parse(localStorage.getItem('foods')) || []
-
       const filterFoods = localFoods.filter(item => dateFns.isSameDay(item.day, mealFood.day))
-      console.log('filterFoods', filterFoods)
 
-      // Add food to a specific day
       let addFoods = []
       if (filterFoods.length > 0) {
         addFoods = localFoods.map((item) => {
@@ -83,9 +91,7 @@ export default( state = initialState, action) => {
         localFoods.push(mealFood)
         addFoods = localFoods
       }
-      console.log('addFoods', addFoods)
 
-      // localFoods.push(mealFood)
       localStorage.setItem('foods', JSON.stringify(addFoods))
 
       return {

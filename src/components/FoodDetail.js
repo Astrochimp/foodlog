@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import { saveFood } from '../actions'
 
 const FoodDetail = (props) => {
-  console.log('props', props)
-
   return(
     <div data-testid='foodlog-detail' className='foodlog--details'>
       {props.food &&
