@@ -8,7 +8,12 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <h1>Meal Tracker</h1>
+          <div className='pizza'>
+            <span aria-label='Food or Pizza' role='img'>🍕</span>
+          </div>
+          <h1>
+            Tracker
+          </h1>
         </header>
         <Day />
         <Modal />

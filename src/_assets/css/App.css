@@ -21,13 +21,28 @@ body {
   margin: 0px auto;
 }
 
-.App-Title {
-  color: var(--lightgreen);
-  margin: 1px 0;
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.App-header {
-  text-align: center;
+header h1 {
+  font-size: 30px;
+  margin: 10px 15px;
+  color: var(--darkgray);
+}
+
+.pizza {
+  width: 25px;
+  height: 30px;
+  display: block;
+  animation: 3s 3 linear spinner;
+}
+
+.pizza:hover {
+  cursor: move;
+  animation: 1s infinite linear spinner;
 }
 
 .search--form {
@@ -178,15 +193,11 @@ button:hover {
 
 @keyframes spinner {
   0% {
-    transform: rotate(0deg) scale(1);
-  }
-
-  50% {
-    transform: rotate(45deg) scale(0.8);
+    transform: rotate(0deg);
   }
 
   100% {
-    transform: rotate(360deg) scale(1);
+    transform: rotate(360deg);
   }
 }
 
@@ -291,5 +302,15 @@ button:hover {
 
 .click-today:hover {
   color: var(--lightgreen);
+  transition: all 300ms ease-in-out;
+}
+
+.message {
+  width: 100%;
+  padding: 20px;
+  color: var(--white);
+  background: var(--darkgreen);
+  border-radius: 3px;
+  text-align: center;
   transition: all 300ms ease-in-out;
 }

@@ -17,7 +17,8 @@ class Day extends Component {
     breakfast: [],
     lunch: [],
     dinner: [],
-    snack: []
+    snack: [],
+    message: ''
   }
 
   setToday = () => {
@@ -35,6 +36,22 @@ class Day extends Component {
   checkMeal = (meal) => {
     switch (meal) {
       case 'Breakfast':
+        if ((this.state.lunch.length > 0) ||
+          (this.state.snack.length > 0) ||
+          (this.state.dinner.length > 0)) {
+            return false
+        }
+        return true
+      case 'Lunch':
+        if ((this.state.snack.length > 0) ||
+          (this.state.dinner.length > 0)) {
+            return false
+        }
+        return true
+      case 'Snack':
+        if (this.state.dinner.length > 0) {
+            return false
+        }
         return true
       default:
         return true
@@ -46,18 +63,32 @@ class Day extends Component {
       if (this.checkMeal(meal)) {
         this.props.addMeal(meal)
       } else {
-        console.log('sorry cannot go back')
+        this.setState({
+          message: '⚠️ Sorry, cannot go back to add more.'
+        })
+        this.clearMessage()
       }
     } else {
-      console.log('sorry! complete')
+      this.setState({
+        message: '⚠️ Sorry, day is complete!'
+      })
+      this.clearMessage()
     }
+  }
+
+  clearMessage = () => {
+    setTimeout(() => {
+      this.setState({
+        message: ''
+      })
+    }, 3000)
   }
 
   doneEating = () => {
     this.props.finishDay(this.props.currentDay)
   }
 
-  componentWillReceiveProps(nextProps) {
+  static getDerivedStateFromProps(nextProps, prevProps) {
     const { currentDay } = nextProps
     const dateFormat = 'MMMM D, YYYY'
     const formattedDate = dateFns.format(currentDay, dateFormat)
@@ -88,7 +119,7 @@ class Day extends Component {
     let dinner = mealDay.filter(food => food.meal === 'Dinner')
     let snack = mealDay.filter(food => food.meal === 'Snack')
 
-    this.setState({
+    return({
       currentDay,
       formattedDate,
       filterFoods,
@@ -179,6 +210,11 @@ class Day extends Component {
             <button onClick={this.doneEating}>I'm Done Eating</button>
           }
         </div>
+
+        {this.state.message && 
+          <div className='message'>{this.state.message}</div>
+        }
+
         <div className='meals'>
           <MealSection
             clickMeal={this.clickMeal}
