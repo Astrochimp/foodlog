@@ -14,6 +14,14 @@ export const ADD_MEAL = 'ADD_MEAL'
 export const NEXT_DAY = 'NEXT_DAY'
 export const PREV_DAY = 'PREV_DAY'
 export const TODAY = 'TODAY'
+export const FINISH = 'FINISH'
+
+export const finishDay = (finishDay) => {
+  return({
+    type: FINISH,
+    payload: finishDay
+  })
+}
 
 export const setToday = () => {
   const setToday = new Date()

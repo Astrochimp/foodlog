@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
 import dateFns from 'date-fns'
 import { connect } from 'react-redux'
-import { addMeal, nextDay, prevDay, setToday } from '../actions/index';
+import { addMeal, nextDay, prevDay, setToday, finishDay } from '../actions/index';
 import MealSection from './MealSection'
 
 class Day extends Component {
 
   state = {
-    currentDay: this.props.currentDay,
+    currentDay: '',
     meal: '',
-    food: {}
+    food: {},
+    formattedDate: '',
+    filterFoods: [],
+    completeDay: false
   }
 
   setToday = () => {
@@ -25,17 +28,47 @@ class Day extends Component {
   }
 
   clickMeal = (meal) => {
-    this.props.addMeal(meal)
+    if (!this.state.completeDay) {
+      this.props.addMeal(meal)
+    } else {
+      console.log('sorry! complete')
+    }
   }
 
   doneEating = () => {
-    console.log('done')
+    this.props.finishDay(this.props.currentDay)
   }
 
-  render () {
+  componentWillReceiveProps(nextProps) {
+    const { currentDay } = nextProps
+    const dateFormat = 'MMMM D, YYYY'
+    const formattedDate = dateFns.format(currentDay, dateFormat)
+
+    let foodList = []
+
+    if (nextProps.mealList.length <= 0) {
+      foodList = JSON.parse(localStorage.getItem('foods')) || []
+    } else {
+      foodList = nextProps.mealList
+    }
+
+    const filterFoods = foodList.filter(item => dateFns.isSameDay(item.day, currentDay))
+    let completeDay = filterFoods.length >= 1 ? filterFoods[0].complete : false
+
+
+    this.setState({
+      currentDay,
+      formattedDate,
+      filterFoods,
+      completeDay
+    })
+  }
+
+  componentDidMount() {
     const { currentDay } = this.props
     const dateFormat = 'MMMM D, YYYY'
     const formattedDate = dateFns.format(currentDay, dateFormat)
+
     let foodList = []
 
     if (this.props.mealList.length <= 0) {
@@ -45,11 +78,22 @@ class Day extends Component {
     }
 
     const filterFoods = foodList.filter(item => dateFns.isSameDay(item.day, currentDay))
+    let completeDay = filterFoods.length >= 1 ? filterFoods[0].complete : false
 
+
+    this.setState({
+      currentDay,
+      formattedDate,
+      filterFoods,
+      completeDay
+    })
+  }
+
+  render () {
     let mealDay = []
 
-    if (filterFoods.length === 1) {
-      mealDay = filterFoods[0].foods
+    if (this.state.filterFoods.length === 1) {
+      mealDay = this.state.filterFoods[0].foods
     }
 
     let totalCals = mealDay.reduce((calories, food) => {
@@ -70,7 +114,7 @@ class Day extends Component {
             &larr;
           </div>
           <div className='current-day'>
-            <h3>{formattedDate}</h3>
+            <h3>{this.state.formattedDate}</h3>
           </div>
           <div className='date-next'
             title='Previous Day'
@@ -81,9 +125,15 @@ class Day extends Component {
 
         <div className='click-today' onClick={this.setToday}>Back to Today</div>
 
+        {this.state.completeDay &&
+          <div className='finished'>Completed Day!</div>
+        }
+
         <div className='calories-toolbar'>
           Total Calories: {totalCals}
-          <button onClick={this.doneEating}>I'm Done Eating</button>
+          {!this.state.completeDay && 
+            <button onClick={this.doneEating}>I'm Done Eating</button>
+          }
         </div>
         <div className='meals'>
           <MealSection
@@ -111,11 +161,13 @@ class Day extends Component {
 export default connect(
   (state) => ({
     currentDay: state.currentDay,
-    mealList: state.mealList
+    mealList: state.mealList,
+    complete: state.complete
   }),{
     addMeal,
     nextDay,
     prevDay,
-    setToday
+    setToday,
+    finishDay
   }
 )(Day)

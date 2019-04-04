@@ -10,6 +10,25 @@ const initialState = {
 
 export default( state = initialState, action) => {
   switch (action.type) {
+    case actions.FINISH:
+      let finishDay = action.payload
+      let getlocalFoods = JSON.parse(localStorage.getItem('foods')) || []
+      let updateTracker = getlocalFoods.map((item) => {
+        if (dateFns.isSameDay(item.day, finishDay)) {
+          item.complete = 'true'
+        }
+
+        return item
+      })
+      console.log('upd', updateTracker)
+
+      localStorage.setItem('foods', JSON.stringify(updateTracker))
+
+      return {
+        ...state,
+        complete: true,
+        mealList: updateTracker
+      }
     case actions.CLOSE_MODAL:
       return {
         ...state,
