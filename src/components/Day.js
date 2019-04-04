@@ -35,24 +35,58 @@ class Day extends Component {
       mealDay = filterFoods[0].foods
     }
 
+    let breakfast = mealDay.filter(food => food.meal === 'Breakfast')
+    let lunch = mealDay.filter(food => food.meal === 'Lunch')
+    let dinner = mealDay.filter(food => food.meal === 'Dinner')
+    let snack = mealDay.filter(food => food.meal === 'Snack')
+
     return (
       <div className='dayview--wrapper'>
         <h3>{formattedDate}</h3>
 
         <div className='meals'>
           <div className='mealtime' onClick={() => this.clickMeal('Breakfast')}>Breakfast</div>
+          <div>
+          {breakfast.map((food, ind) => {
+            return(
+              <div key={ind}>
+                <div>{food.food.name} {food.food.calories}</div>
+              </div>
+            )
+          })}
+          </div>
           <div className='mealtime' onClick={() => this.clickMeal('Lunch')}>Lunch</div>
+          <div>
+            {lunch.map((food, ind) => {
+              return(
+                <div key={ind}>
+                  <div>{food.food.name} {food.food.calories}</div>
+                </div>
+              )
+            })}
+          </div>
           <div className='mealtime' onClick={() => this.clickMeal('Dinner')}>Dinner</div>
+          <div>
+            {dinner.map((food, ind) => {
+              return(
+                <div key={ind}>
+                  <div>{food.food.name} {food.food.calories}</div>
+                </div>
+              )
+            })}
+          </div>
+
           <div className='mealtime' onClick={() => this.clickMeal('Snack')}>Snack</div>
+          <div>
+            {snack.map((food, ind) => {
+              return(
+                <div key={ind}>
+                  <div>{food.food.name} {food.food.calories}</div>
+                </div>
+              )
+            })}
+          </div>
         </div>
-        {mealDay.map((food, ind) => {
-          return(
-            <div key={ind}>
-              <strong>{food.meal}</strong>
-              <div>{food.food.name} {food.food.calories}</div>
-            </div>
-          )
-        })}
       </div>
     )
   }
