@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <h1>Food Log</h1>
+          <h1>Meal Tracker</h1>
         </header>
         <Day />
         <Modal />

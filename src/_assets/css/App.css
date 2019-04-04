@@ -8,14 +8,18 @@
 }
 
 body {
-  background: var(--black);
-  color: var(--white);
+  background: var(--white);
+  color: var(--black);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
   margin: 0;
   padding: 0;
 }
 
+.App {
+  width: 600px;
+  margin: 0px auto;
+}
 
 .App-Title {
   color: var(--lightgreen);
@@ -203,7 +207,6 @@ button {
 }
 
 .meals {
-  width: 100vw;
   display: flex;
   flex-direction: column;
 }
@@ -212,10 +215,23 @@ button {
   display: block;
   border-bottom: 1px solid #eee;
   cursor: pointer;
-  padding: 5px 20px;
-  margin: 1px;
+  padding: 5px;
+  margin: 10px 1px 1px 1px;
+  font-weight: bold;
 }
 
 .mealtime:hover {
-  background-color: var(--dark-green);
+  background-color: var(--lightgreen);
+}
+
+.food-list {
+  margin: 0 0 0 20px;
+}
+
+.food-item {
+  padding: 3px;
+}
+
+.food-item:hover {
+  background: var(--lightgray);
 }
