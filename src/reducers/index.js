@@ -20,7 +20,6 @@ export default( state = initialState, action) => {
 
         return item
       })
-      console.log('upd', updateTracker)
 
       localStorage.setItem('foods', JSON.stringify(updateTracker))
 

@@ -2,7 +2,7 @@
   --black: #0B0C10;
   --darkgray: #1F2833;
   --lightgray: #C5C6C7;
-  --lightgreen: #66FCF1;
+  --lightgreen: rgb(19, 192, 180);
   --darkgreen: #45A29E;
   --white: #fff;
 }
@@ -57,10 +57,25 @@ header h1 {
   background: none;
   border: none;
   border-bottom: 3px solid var(--lightgreen);
-  color: var(--lightgreen);
+  color: var(--darkgray);
   padding: 5px;
   flex: 1;
   font-size: 28px;
+}
+
+.finished {
+  text-align: center;
+  font-size: 30px;
+  color: var(--lightgreen);
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+  padding: 3px;
+}
+
+.calories-toolbar {
+  text-align: right;
+  font-size: 26px;
+  margin-top: 10px;
 }
 
 button {
@@ -290,7 +305,33 @@ button:hover {
 }
 
 .food-item {
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  justify-content: space-between;
   padding: 3px;
+}
+
+.food-item .qty {
+  background: var(--lightgreen);
+  color: var(--white);
+  padding: 3px 9px 3px 9px;
+  border-radius: 50%;
+}
+
+.food-item .food-name {
+  width: 90%;
+  margin: 0 10px;
+  padding: 3px;
+}
+
+.food-item .brand {
+  color: var(--lightgray);
+  margin-left: 10px;
+}
+
+.food-item .calories {
+  color: #cc6d00;
 }
 
 .food-item:hover {

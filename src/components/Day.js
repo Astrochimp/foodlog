@@ -204,8 +204,7 @@ class Day extends Component {
           <div className='finished'>Completed Day!</div>
         }
 
-        <div className='calories-toolbar'>
-          Total Calories: {this.state.totalCals}
+        <div className='options-toolbar'>
           {!this.state.completeDay && 
             <button onClick={this.doneEating}>I'm Done Eating</button>
           }
@@ -232,6 +231,9 @@ class Day extends Component {
             clickMeal={this.clickMeal}
             mealName='Dinner'
             mealList={this.state.dinner} />
+        </div>
+        <div className='calories-toolbar'>
+          Total Calories: {this.state.totalCals}
         </div>
       </div>
     )

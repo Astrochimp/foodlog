@@ -46,7 +46,7 @@ class FoodList extends Component {
         {this.props.message &&
           <div>{this.props.message}</div>
         }
-        
+
         {pagelist.length > 0 &&
           <div className='pagination'>{pagelist}</div>
         }
