@@ -8,7 +8,7 @@ const MealSection = (props) => {
         {props.mealList.map((food, ind) => {
           return(
             <div key={ind}>
-              <div className='food-item'>{food.food.name} {food.food.calories}</div>
+              <div className='food-item'>({food.qty}) {food.food.name} {food.food.calories}</div>
             </div>
           )
         })}

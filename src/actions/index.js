@@ -48,10 +48,15 @@ export const prevDay = (currentday) => {
   })
 }
 
-export const saveFood = (food) => {
+export const saveFood = (food, qty) => {
+  food.calories = food.calories * qty
+
   return({
     type: SAVE_FOOD,
-    payload: food
+    payload: {
+      food,
+      qty
+    }
   })
 }
 

@@ -245,6 +245,28 @@ button:hover {
   transition: all 300ms ease;
 }
 
+.food-form {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-items: flex-start;
+  border-top: 1px solid #eee;
+  margin: 5px 0;
+  padding: 3px;
+}
+
+.food-form select {
+  border: 1px solid var(--darkgreen);
+  background: none;
+  padding: 2px;
+  font-size: 20px;
+  border-radius: 2px;
+}
+
+.food-form button {
+  cursor: pointer;
+}
+
 .meals {
   display: flex;
   flex-direction: column;

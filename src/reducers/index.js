@@ -86,7 +86,8 @@ export default( state = initialState, action) => {
 
       const foodDetail = {
         meal: state.currentMeal,
-        food: action.payload
+        food: action.payload.food,
+        qty: action.payload.qty
       }
 
       const mealFood = {

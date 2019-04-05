@@ -1,22 +1,47 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { saveFood } from '../actions'
 
-const FoodDetail = (props) => {
-  return(
-    <div data-testid='foodlog-detail' className='foodlog--details'>
-      {props.food &&
-        <div>
-          <h2 data-testid='foodlog-name'>{props.food.name}</h2>
-          <div data-testid='foodlog-brand'>Brand: { props.food.brand }</div>
-          <div data-testid='foodlog-calories'>Calories: { props.food.calories }</div>
-          <div data-testid='foodlog-portion'>Portion: { props.food.portion }</div>
 
-          <button onClick={() => props.saveFood(props.food)}>Add</button>
-        </div>
-      }
-    </div>
-  )
+class FoodDetail extends Component {
+  state = {
+    quantity: 1
+  }
+
+  updateQuantity = (e) => {
+    this.setState({
+      quantity: e.target.value
+    })
+  }
+
+  render() {
+    return(
+      <div data-testid='foodlog-detail' className='foodlog--details'>
+        {this.props.food &&
+          <div>
+            <h2 data-testid='foodlog-name'>{this.props.food.name}</h2>
+            <div data-testid='foodlog-brand'>Brand: { this.props.food.brand }</div>
+            <div data-testid='foodlog-calories'>Calories: { this.props.food.calories }</div>
+            <div data-testid='foodlog-portion'>Portion: { this.props.food.portion }</div>
+
+            <div className='food-form'>
+              <label htmlFor='quantity'>Qty:</label>
+              <select name='quantity' 
+                value={this.state.quantity} 
+                onChange={this.updateQuantity}>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+              </select>
+              <button onClick={() => this.props.saveFood(this.props.food, this.state.quantity)}>Add</button>
+            </div>
+          </div>
+        }
+      </div>
+    )
+  }
 }
 
 export default connect(
