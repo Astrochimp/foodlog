@@ -10,8 +10,8 @@ class FoodList extends Component {
     showpage: 0
   }
 
-  componentWillReceiveProps (nextProps) {
-    let pg = nextProps.foods
+  static getDerivedStateFromProps (nextProps) {
+    let pg = nextProps.foods || []
     const pages = Math.ceil(pg.length / 50)
     let pageArr = []
 
@@ -19,11 +19,10 @@ class FoodList extends Component {
       pageArr.push(pg.splice(0, 50));
     }
 
-    this.setState({
+    return({
       foodPages: pageArr,
       pages
     })
-
   }
 
   setPage = (page) => {
@@ -47,7 +46,11 @@ class FoodList extends Component {
         {this.props.message &&
           <div>{this.props.message}</div>
         }
-        <div className='pagination'>{pagelist}</div>
+        
+        {pagelist.length > 0 &&
+          <div className='pagination'>{pagelist}</div>
+        }
+
         {ctPages.length > 0 &&
           ctPages[this.state.showpage].map((fd, ind) => {
             return (<FoodCard key={ind} food={fd} />)
